@@ -1,7 +1,7 @@
 # GTA IV: Left Shift Sprint Fix Mod
 
 This a tiny mod that fixes an oversight in Grand Theft Auto IV where the left
-shift key *always* sprints, regardless of whether it's being held of pressed
+shift key *always* sprints, regardless of whether it's being held or pressed
 repeatedly, unlike other keys.
 
 This behavior is corrected in this mod by making a call to a native function of
