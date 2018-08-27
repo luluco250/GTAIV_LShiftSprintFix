@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 	<ItemGroup>
-		<Reference Include="../ScriptHookDotNet.dll">
+		<Reference Include="ScriptHookDotNet.dll">
 			<SpecifiedVersion>false</SpecifiedVersion>
 			<HintPath>../bin/ScriptHookDotNet.dll</HintPath>
 			<Private>false</Private>
