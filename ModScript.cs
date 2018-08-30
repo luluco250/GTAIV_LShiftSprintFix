@@ -45,6 +45,9 @@ public class ModScript : Script {
 		bool sprint = useCapsLock && Control.IsKeyLocked(Keys.CapsLock);
 		sprint = sprint || ((Game.GameTime - lastClickTime) < sprintInterval);
 
+		// Check in case player wasn't sprinting already
+		// so that the (correct) jogging animation starts
+		// upon the first press of left shift.
 		CanSprint(isSprinting && sprint);
 		isSprinting = sprint;
 	}
