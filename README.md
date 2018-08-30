@@ -16,6 +16,15 @@ system. To check if it's enabled, simply hit the shift key a few times to see
 if a window about "sticky keys" pops up, if it does then follow the instructions
 in it to disable it.
 
+## How to install
+
+Get the latest release [here](https://github.com/luluco250/GTAIV_LShiftSprintFix/releases),
+extract the files to ```(...)\Grand Theft Auto IV\GTAIV\scripts``` and make sure
+you have the .NET Scripthook installed. If you don't, get it
+[here](http://hazardx.com/files/gta4_net_scripthook-83).
+
+You can then change the settings in ```LShiftSprintFix.ini```.
+
 ## How to build
 
 To build, simply use either the .NET CLI tools with the command ```dotnet build```
