@@ -5,72 +5,58 @@ using GTA;
 using GTA.Native;
 
 public class ModScript : Script {
-	int tickInterval;
-	int sprintInterval;
+	  //==========//
+	 // Settings //
+	//==========//
+
+	readonly int tickInterval;
+	readonly int sprintInterval;
+	readonly bool useCapsLock;
+
+	  //=======//
+	 // State //
+	//=======//
 
 	int lastClickTime = Game.GameTime;
 	bool isSprinting = false;
 
+	  //=============//
+	 // Constructor //
+	//=============//
+
 	public ModScript() {
+		// Read settings...
 		tickInterval = Settings.GetValueInteger("TickInterval", "Settings", 100);
 		sprintInterval = Settings.GetValueInteger("SprintInterval", "Settings", 300);
+		useCapsLock = Settings.GetValueBool("UseCapsLock", "Settings", true);
 
+		// Setup events...
 		KeyDown += new GTA.KeyEventHandler(OnKeyDown);
 
-		bool useCapsLock = Settings.GetValueBool("UseCapsLock", "Settings", true);
 		Interval = tickInterval;
-
-		if (Settings.GetValueBool("UseSimpleAlgorithm", "Settings", false)) {
-			if (useCapsLock)
-				Tick += new EventHandler(OnTick_Simple);
-			else
-				Tick += new EventHandler(OnTick_SimpleNoCapsLock);
-		} else {
-			if (useCapsLock)
-				Tick += new EventHandler(OnTick);
-			else
-				Tick += new EventHandler(OnTick_NoCapsLock);
-		}
+		Tick += new EventHandler(OnTick);
 	}
 
-	void OnTick(object sender, EventArgs e) {
-		if (Control.IsKeyLocked(Keys.CapsLock))
-			return;
-		
-		OnTick_NoCapsLock(sender, e);
+	  //========//
+	 // Events //
+	//========//
+
+	void OnTick(object sender, EventArgs args) {
+		bool sprint = useCapsLock && Control.IsKeyLocked(Keys.CapsLock);
+		sprint = sprint || ((Game.GameTime - lastClickTime) < sprintInterval);
+
+		CanSprint(isSprinting && sprint);
+		isSprinting = sprint;
 	}
 
-	void OnTick_NoCapsLock(object sender, EventArgs e) {
-		if ((Game.GameTime - lastClickTime) < sprintInterval) {
-			// Don't sprint immediately
-			if (isSprinting)
-				CanSprint(true);
-			
-			isSprinting = true;
-		} else {
-			if (isSprinting)
-				CanSprint(false);
-			
-			isSprinting = false;
-		}
-	}
-
-	void OnTick_Simple(object sender, EventArgs e) {
-		DoSimple(Control.IsKeyLocked(Keys.CapsLock));
-	}
-
-	void OnTick_SimpleNoCapsLock(object sender, EventArgs e) {
-		DoSimple();
-	}
-
-	void DoSimple(bool caps = false) {
-		CanSprint(caps || (Game.GameTime - lastClickTime) < sprintInterval);
-	}
-
-	void OnKeyDown(object sender, GTA.KeyEventArgs e) {
-		if (e.Key == Keys.LShiftKey)
+	void OnKeyDown(object sender, GTA.KeyEventArgs args) {
+		if (args.Key == Keys.LShiftKey)
 			lastClickTime = Game.GameTime;
 	}
+
+	  //=========//
+	 // Helpers //
+	//=========//
 
 	void CanSprint(bool b) {
 		Function.Call("DISABLE_PLAYER_SPRINT", Player.Index, !b);
