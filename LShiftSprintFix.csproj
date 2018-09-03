@@ -1,18 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
-	<ItemGroup>
-		<Reference Include="ScriptHookDotNet.dll">
-			<SpecifiedVersion>false</SpecifiedVersion>
-			<HintPath>../bin/ScriptHookDotNet.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="System.Windows.Forms"/>
-	</ItemGroup>
 	<PropertyGroup>
-		<TargetFramework>net4</TargetFramework>
+		<TargetFramework>net40</TargetFramework>
 		<PlatformTarget>x86</PlatformTarget>
 		<Configuration>Release</Configuration>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
 		<PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="ScriptHookDotNet.dll">
+			<SpecifiedVersion>false</SpecifiedVersion>
+			<HintPath>ScriptHookDotNet.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="System.Windows.Forms"/>
+	</ItemGroup>
 </Project>
