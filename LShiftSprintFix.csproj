@@ -4,7 +4,6 @@
 		<PlatformTarget>x86</PlatformTarget>
 		<Configuration>Release</Configuration>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 	<ItemGroup>
